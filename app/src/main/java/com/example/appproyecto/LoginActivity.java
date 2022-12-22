@@ -3,6 +3,7 @@ package com.example.appproyecto;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -49,6 +50,11 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("Patatuela",response.toString());
                         if (response.isSuccessful()){
                             startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
+                            SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("name", mail.getText().toString());
+                            editor.commit();
+                            Log.d("Patatuelilla", prefs.getString("name",null));
                         }
                         else {
                             Snackbar mySnackbar = Snackbar.make(view, "Inicio de Sesion Incorrecto", BaseTransientBottomBar.LENGTH_SHORT);
