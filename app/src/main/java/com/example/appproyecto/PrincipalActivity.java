@@ -21,7 +21,7 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     private void configureLogoutButton() {
-        Button button = (Button) findViewById(R.id.button);
+        Button button = (Button) findViewById(R.id.button5);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
