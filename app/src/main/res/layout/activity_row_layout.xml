@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
-    android:background="#A89E9E"
-    android:padding="6dip">
+    android:background="@drawable/fondo_recycler"
+    android:padding="5dp">
 
     <ImageView
         android:id="@+id/icon"

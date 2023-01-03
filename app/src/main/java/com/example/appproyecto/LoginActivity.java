@@ -40,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Swagger swagger = Swagger.retrofit.create(Swagger.class);
-                //Call<Users> call = swagger.Login(mail.toString(),password.toString());
                 UserLogin ul = new UserLogin(mail.getText().toString(),password.getText().toString());
                 Call<User> call = swagger.Login(ul);
                 call.enqueue(new Callback<User>() {
@@ -63,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
-                        Snackbar mySnackbar = Snackbar.make(view, "No se ha podido Iniciar Sesion", BaseTransientBottomBar.LENGTH_SHORT);
+                        Snackbar mySnackbar = Snackbar.make(view, "No se ha podido Iniciar Sesion / Failure", BaseTransientBottomBar.LENGTH_SHORT);
                         Log.d("Patata",t.toString());
                         mySnackbar.show();
                     }

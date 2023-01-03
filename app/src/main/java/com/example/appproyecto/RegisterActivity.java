@@ -3,6 +3,7 @@ package com.example.appproyecto;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,7 +12,6 @@ import android.widget.EditText;
 
 import com.example.appproyecto.modelo.Swagger;
 import com.example.appproyecto.modelo.User;
-import com.example.appproyecto.modelo.UserLogin;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -41,16 +41,19 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Swagger swagger = Swagger.retrofit.create(Swagger.class);
-                //Call<Users> call = swagger.Login(mail.toString(),password.toString());
-                User ur = new User(mail.getText().toString(),password.getText().toString(),name.getText().toString(),username.getText().toString(),surname.getText().toString());
-                Call<User> call = swagger.Register(ur);
-                call.enqueue(new Callback<User>() {
+                User ur = new User(username.getText().toString(),mail.getText().toString(),name.getText().toString(),surname.getText().toString(),password.getText().toString());
+                Call call = swagger.Register(ur);//Call<User> call = swagger.Register(ur)
+                call.enqueue(new Callback<User>() {//call.enqueue(new Callback<User>()
                     @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
+                    public void onResponse(Call<User> call, Response<User> response) {//Call<User> call, Response<User> response
                         Log.d("Patatilla",call.toString());
                         Log.d("Patatuela",response.toString());
                         if (response.isSuccessful()){
                             startActivity(new Intent(RegisterActivity.this, PrincipalActivity.class));
+                            SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("name", mail.getText().toString());
+                            editor.commit();
                         }
                         else {
                             Snackbar mySnackbar = Snackbar.make(view, "Registro Incorrecto", BaseTransientBottomBar.LENGTH_SHORT);
@@ -58,8 +61,8 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                     @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        Snackbar mySnackbar = Snackbar.make(view, "No has podido Registrarte", BaseTransientBottomBar.LENGTH_SHORT);
+                    public void onFailure(Call<User> call, Throwable t) {//Call<User> call, Throwable t
+                        Snackbar mySnackbar = Snackbar.make(view, "No has podido Registrarte / Failure", BaseTransientBottomBar.LENGTH_SHORT);
                         Log.d("Patata",t.toString());
                         mySnackbar.show();
                     }

@@ -91,7 +91,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         holder.txtFooter.setText(o.getDescripcion()); //"Descripcion: " + o.getDescripcion()
 
-        holder.icon.setImageResource(R.drawable.icono_arma3);
+        holder.icon.setImageResource(R.drawable.icono_arma2);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

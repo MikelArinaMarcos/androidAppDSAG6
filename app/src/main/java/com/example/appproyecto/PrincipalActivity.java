@@ -29,6 +29,7 @@ public class PrincipalActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.clear();
                 editor.commit();
+                startActivity(new Intent(PrincipalActivity.this, MainActivity.class));
             }
         });
     }

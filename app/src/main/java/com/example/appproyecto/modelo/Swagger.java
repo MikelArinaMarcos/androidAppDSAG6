@@ -35,5 +35,4 @@ public interface Swagger {
     @GET("juego/objetos")
     Call<List<Objeto>> Objetos();
 
-
 }
