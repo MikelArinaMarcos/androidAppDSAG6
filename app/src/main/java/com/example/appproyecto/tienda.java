@@ -59,16 +59,6 @@ public class tienda extends AppCompatActivity {
                 };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
-        /*
-        swipeRefreshLayout.setOnRefreshListener(
-                new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        doApiCall(swipeRefreshLayout);
-                    }
-                }
-        );
-        */
     }
     private void doApiCall() { //final SwipeRefreshLayout mySwipeRefreshLayout
         Swagger swagger = Swagger.retrofit.create(Swagger.class);

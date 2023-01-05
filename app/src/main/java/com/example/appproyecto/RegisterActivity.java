@@ -46,8 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
                 call.enqueue(new Callback<User>() {//call.enqueue(new Callback<User>()
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {//Call<User> call, Response<User> response
-                        Log.d("Patatilla",call.toString());
-                        Log.d("Patatuela",response.toString());
+                        Log.d("Respuesta_1",response.toString());
                         if (response.isSuccessful()){
                             startActivity(new Intent(RegisterActivity.this, PrincipalActivity.class));
                             SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
@@ -63,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {//Call<User> call, Throwable t
                         Snackbar mySnackbar = Snackbar.make(view, "No has podido Registrarte / Failure", BaseTransientBottomBar.LENGTH_SHORT);
-                        Log.d("Patata",t.toString());
+                        Log.d("Fallada",t.toString());
                         mySnackbar.show();
                     }
                 });

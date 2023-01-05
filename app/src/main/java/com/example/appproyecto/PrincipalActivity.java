@@ -18,6 +18,18 @@ public class PrincipalActivity extends AppCompatActivity {
         configureTiendaButton();
 
         configureLogoutButton();
+
+        configureProfileButton();
+    }
+
+    private void configureProfileButton(){
+        Button button = (Button) findViewById(R.id.button_profile);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PrincipalActivity.this, activity_profile.class));
+            }
+        });
     }
 
     private void configureLogoutButton() {

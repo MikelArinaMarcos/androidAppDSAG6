@@ -16,6 +16,7 @@ import com.example.appproyecto.modelo.User;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,15 +46,13 @@ public class LoginActivity extends AppCompatActivity {
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
-                        Log.d("Patatilla",call.toString());
-                        Log.d("Patatuela",response.toString());
+                        Log.d("Respuesta_1",response.toString());
                         if (response.isSuccessful()){
                             startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
                             SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
                             SharedPreferences.Editor editor = prefs.edit();
                             editor.putString("name", mail.getText().toString());
                             editor.commit();
-                            Log.d("Patatuelilla", prefs.getString("name",null));
                         }
                         else {
                             Snackbar mySnackbar = Snackbar.make(view, "Inicio de Sesion Incorrecto", BaseTransientBottomBar.LENGTH_SHORT);
@@ -63,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
                         Snackbar mySnackbar = Snackbar.make(view, "No se ha podido Iniciar Sesion / Failure", BaseTransientBottomBar.LENGTH_SHORT);
-                        Log.d("Patata",t.toString());
+                        Log.d("Fallada",t.toString());
                         mySnackbar.show();
                     }
                 });

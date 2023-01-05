@@ -8,6 +8,19 @@
     tools:context=".PrincipalActivity">
 
     <Button
+        android:id="@+id/button_profile"
+        android:layout_width="207dp"
+        android:layout_height="77dp"
+        android:layout_marginTop="20dp"
+        android:text="Profile"
+        android:textSize="16sp"
+        app:iconTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tienda"
+        app:rippleColor="#00FFFFFF" />
+
+    <Button
         android:id="@+id/button_logout"
         android:layout_width="207dp"
         android:layout_height="77dp"
@@ -17,7 +30,7 @@
         app:iconTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tienda"
+        app:layout_constraintTop_toBottomOf="@+id/button_profile"
         app:rippleColor="#00FFFFFF" />
 
     <Button
