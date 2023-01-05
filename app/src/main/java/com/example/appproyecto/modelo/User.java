@@ -1,5 +1,7 @@
 package com.example.appproyecto.modelo;
 
+import java.util.List;
+
 public class User {
     private int idUsuario;
     private String mail;

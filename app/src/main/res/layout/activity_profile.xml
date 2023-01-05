@@ -6,15 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".activity_profile">
 
+    <TextView
+        android:id="@+id/mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dinero" />
+
+    <TextView
+        android:id="@+id/dinero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
+
     <ImageView
         android:id="@+id/image_profile"
         android:layout_width="189dp"
         android:layout_height="194dp"
         android:layout_marginTop="25dp"
+        android:background="@drawable/profile3"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/profile3"
+        tools:srcCompat="@drawable/profile3"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/username"

@@ -6,6 +6,8 @@ import java.util.List;
 
 //import android.support.v7.widget.RecyclerView;
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +18,12 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appproyecto.modelo.Objeto;
+import com.example.appproyecto.modelo.Swagger;
+import com.example.appproyecto.modelo.User;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Objeto> values;
@@ -85,7 +93,29 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.txtHeader.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                remove(position);
+                //remove(position);
+                Log.d("NombreObjeto1",values.get(0).getNombre());
+                Log.d("NombreObjeto2",values.get(1).getNombre());
+                Log.d("NombreObjeto3",values.get(2).getNombre());
+                Log.d("ID1",String.valueOf(values.get(0).getIdObjeto()));
+                Log.d("ID2",String.valueOf(values.get(1).getIdObjeto()));
+                Log.d("ID3",String.valueOf(values.get(2).getIdObjeto()));
+                /*
+                Swagger swagger = Swagger.retrofit.create(Swagger.class);
+                Call call = swagger.ComprarObjeto(45,2);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onResponse(Call call, Response response) {
+                        Log.d("ComprarObjeto","Objeto Compradissimo");
+                    }
+                    @Override
+                    public void onFailure(Call call, Throwable t) {
+                        Log.d("ComprarObjeto","Objeto NOOOOOOOOOOO Comprado");
+                    }
+
+
+                });
+                */
             }
         });
 

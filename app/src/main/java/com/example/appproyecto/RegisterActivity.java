@@ -20,11 +20,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
+    private User usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        usuario = new User();
 
         configureRegisterButton();
     }
@@ -47,12 +50,21 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {//Call<User> call, Response<User> response
                         Log.d("Respuesta_1",response.toString());
+                        Log.d("Respuesta_2",response.body().toString());
                         if (response.isSuccessful()){
+                            usuario = response.body();
+                            Log.d("Nombre usuario",usuario.getName());
                             startActivity(new Intent(RegisterActivity.this, PrincipalActivity.class));
                             SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
                             SharedPreferences.Editor editor = prefs.edit();
-                            editor.putString("name", mail.getText().toString());
+                            editor.putString("name", usuario.getName());
+                            editor.putInt("idUsuario", usuario.getIdUsuario());
+                            editor.putInt("dinero", usuario.getDinero());
+                            editor.putString("username",usuario.getUsername());
+                            editor.putString("mail",usuario.getMail());
+                            editor.putInt("xp", usuario.getXp());
                             editor.commit();
+
                         }
                         else {
                             Snackbar mySnackbar = Snackbar.make(view, "Registro Incorrecto", BaseTransientBottomBar.LENGTH_SHORT);
