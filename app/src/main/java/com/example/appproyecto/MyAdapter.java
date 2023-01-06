@@ -100,7 +100,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 Log.d("ID1",String.valueOf(values.get(0).getIdObjeto()));
                 Log.d("ID2",String.valueOf(values.get(1).getIdObjeto()));
                 Log.d("ID3",String.valueOf(values.get(2).getIdObjeto()));
-                /*
+
+
                 Swagger swagger = Swagger.retrofit.create(Swagger.class);
                 Call call = swagger.ComprarObjeto(45,2);
                 call.enqueue(new Callback() {
@@ -115,7 +116,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 
                 });
-                */
+
             }
         });
 

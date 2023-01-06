@@ -36,6 +36,6 @@ public interface Swagger {
     Call<List<Objeto>> Objetos();
 
     @POST("juego/user/buy/{idObjeto}/{idUsuario}")
-    Call ComprarObjeto(@Body int idUsuario, @Body int idObjeto);
-    //Call ComprarObjeto(@Field("idUsuario")int idUsuario, @Field("idObjeto")int idObjeto);
+    //Call ComprarObjeto(@Body int idUsuario, @Body int idObjeto);
+    Call<Void> ComprarObjeto(@Path("idUsuario")int idUsuario, @Path("idObjeto")int idObjeto);
 }
