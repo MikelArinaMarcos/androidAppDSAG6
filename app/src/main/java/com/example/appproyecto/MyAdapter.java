@@ -1,5 +1,6 @@
 package com.example.appproyecto;
 
+import static android.content.Context.MODE_PRIVATE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,19 +15,23 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.os.Bundle;
 
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appproyecto.modelo.Objeto;
 import com.example.appproyecto.modelo.Swagger;
 import com.example.appproyecto.modelo.User;
 
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     private List<Objeto> values;
+
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -101,9 +106,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 Log.d("ID2",String.valueOf(values.get(1).getIdObjeto()));
                 Log.d("ID3",String.valueOf(values.get(2).getIdObjeto()));
 
+                //SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
 
                 Swagger swagger = Swagger.retrofit.create(Swagger.class);
-                Call call = swagger.ComprarObjeto(45,2);
+                Call call = swagger.ComprarObjeto(49,values.get(position).getIdObjeto());//2
                 call.enqueue(new Callback() {
                     @Override
                     public void onResponse(Call call, Response response) {
@@ -113,7 +119,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     public void onFailure(Call call, Throwable t) {
                         Log.d("ComprarObjeto","Objeto NOOOOOOOOOOO Comprado");
                     }
-
 
                 });
 

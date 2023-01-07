@@ -22,6 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
+    //Utilizamos este Usuario para recoger la respuesta del Swager y poder trabajar con un Usuario
     private User usuario;
 
     @Override
@@ -29,12 +30,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //Inicializamos el usuario
         usuario = new User();
 
         configureLoginButton();
     }
 
     private void configureLoginButton(){
+        //Inicializamos y le damos los valores al Button y a los EditText
         Button LoginButton = (Button) findViewById(R.id.Login_button);
         EditText mail = (EditText) findViewById(R.id.textMail);
         EditText password = (EditText) findViewById(R.id.textPassword);
@@ -42,17 +45,24 @@ public class LoginActivity extends AppCompatActivity {
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Inicializamos y llamamos al swagger para poder hacer las consultas pertinentes
                 Swagger swagger = Swagger.retrofit.create(Swagger.class);
+                //Assignamos valores a una classe UserLogin
                 UserLogin ul = new UserLogin(mail.getText().toString(),password.getText().toString());
                 Call<User> call = swagger.Login(ul);
                 call.enqueue(new Callback<User>() {
                     @Override
+                    //Si obtenemos una respuesta
                     public void onResponse(Call<User> call, Response<User> response) {
                         Log.d("Respuesta_1",response.toString());
                         Log.d("Respuesta_2",response.body().toString());
+                        //Si la respuesta es correcta, en nuestro caso recibimos un 201
                         if (response.isSuccessful()){
+                            //rellenamos el valor de usuario con la respuesta obtenida
                             usuario = response.body();
+                            //Como la respuesta es correcta podemos ir a la actividad principal
                             startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
+                            //Inicializamos unas SharedPreferences para poder rellenar sus valores
                             SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
                             SharedPreferences.Editor editor = prefs.edit();
                             editor.putString("name", usuario.getName());
@@ -68,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                             mySnackbar.show();
                         }
                     }
+                    //Si no obtenemos una respuesta
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
                         Snackbar mySnackbar = Snackbar.make(view, "No se ha podido Iniciar Sesion / Failure", BaseTransientBottomBar.LENGTH_SHORT);
