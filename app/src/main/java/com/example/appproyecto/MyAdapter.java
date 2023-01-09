@@ -23,6 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.appproyecto.modelo.Objeto;
 import com.example.appproyecto.modelo.Swagger;
 import com.example.appproyecto.modelo.User;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 
 import retrofit2.Call;
@@ -30,6 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
+    private  AppCompatActivity activity;
     private List<Objeto> values;
 
 
@@ -67,7 +70,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         notifyItemRemoved(position);
     }
 
-    public MyAdapter(){values = new ArrayList<>();}
+    public MyAdapter(AppCompatActivity activity){
+        this.activity = activity;
+        values = new ArrayList<>();}
     // Provide a suitable constructor (depends on the kind of dataset)
     public MyAdapter(List<Objeto> myDataset) {
         values = myDataset;
@@ -99,25 +104,35 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             @Override
             public void onClick(View v) {
                 //remove(position);
-                Log.d("NombreObjeto1",values.get(0).getNombre());
-                Log.d("NombreObjeto2",values.get(1).getNombre());
-                Log.d("NombreObjeto3",values.get(2).getNombre());
-                Log.d("ID1",String.valueOf(values.get(0).getIdObjeto()));
-                Log.d("ID2",String.valueOf(values.get(1).getIdObjeto()));
-                Log.d("ID3",String.valueOf(values.get(2).getIdObjeto()));
+                for (int i = 0; i < values.size(); i++){
+                    Log.d("NombreObjeto" + i,values.get(i).getNombre());
+                }
+                for (int i = 0; i < values.size(); i++){
+                    Log.d("ID" + i,String.valueOf(values.get(i).getIdObjeto()));
+                }
 
-                //SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
-
+                SharedPreferences prefs = MyAdapter.this.activity.getSharedPreferences("myPrefs", MODE_PRIVATE);
+                int idUsuario = prefs.getInt("idUsuario",0);
                 Swagger swagger = Swagger.retrofit.create(Swagger.class);
-                Call call = swagger.ComprarObjeto(49,values.get(position).getIdObjeto());//2
+                //MyAdapter.this.activity.
+                Call call = swagger.ComprarObjeto(idUsuario,values.get(position).getIdObjeto());
                 call.enqueue(new Callback() {
                     @Override
                     public void onResponse(Call call, Response response) {
-                        Log.d("ComprarObjeto","Objeto Compradissimo");
+                        //Log.d("ComprarObjeto","Objeto Compradissimo");
+                        if (response.isSuccessful()){
+                            Snackbar mySnackbar = Snackbar.make(v, "Objeto Compradisssssimo", BaseTransientBottomBar.LENGTH_SHORT);
+                            mySnackbar.show();
+                        }
+                        else{
+                            Snackbar mySnackbar = Snackbar.make(v, "Eres mas pobre que un Venezolano", BaseTransientBottomBar.LENGTH_SHORT);
+                            mySnackbar.show();
+                        }
                     }
                     @Override
                     public void onFailure(Call call, Throwable t) {
-                        Log.d("ComprarObjeto","Objeto NOOOOOOOOOOO Comprado");
+                        Snackbar mySnackbar = Snackbar.make(v, "Obten Conexion primero crack", BaseTransientBottomBar.LENGTH_SHORT);
+                        mySnackbar.show();
                     }
 
                 });

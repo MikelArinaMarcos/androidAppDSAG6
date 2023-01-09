@@ -44,7 +44,7 @@ public class tienda extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new MyAdapter();
+        adapter = new MyAdapter(this);
         recyclerView.setAdapter(adapter);
 
         doApiCall(); //null
@@ -77,12 +77,12 @@ public class tienda extends AppCompatActivity {
                 adapter.setData(response.body());
                 Log.d("Tienda",response.body().toString());
                 listaobjetos = response.body();
-                Log.d("NombreObjeto1",listaobjetos.get(0).getNombre());
-                Log.d("NombreObjeto2",listaobjetos.get(1).getNombre());
-                Log.d("NombreObjeto3",listaobjetos.get(2).getNombre());
-                Log.d("ID1",String.valueOf(listaobjetos.get(0).getIdObjeto()));
-                Log.d("ID2",String.valueOf(listaobjetos.get(1).getIdObjeto()));
-                Log.d("ID3",String.valueOf(listaobjetos.get(2).getIdObjeto()));
+                for (int i = 0; i < listaobjetos.size(); i++){
+                    Log.d("NombreObjeto" + i,listaobjetos.get(i).getNombre());
+                }
+                for (int i = 0; i < listaobjetos.size(); i++){
+                    Log.d("ID" + i,String.valueOf(listaobjetos.get(i).getIdObjeto()));
+                }
             }
             @Override
             public void onFailure(Call<List<Objeto>> call, Throwable t) {
