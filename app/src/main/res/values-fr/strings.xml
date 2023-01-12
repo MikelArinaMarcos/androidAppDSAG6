@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ProjectApp</string>
+    <string name="texto_bienvenida">Bienvenu à l\'application</string>
+    <string name="cambiar_idioma">Changer la langue</string>
+</resources>
