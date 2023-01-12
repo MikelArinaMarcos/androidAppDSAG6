@@ -9,12 +9,10 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
         String value = prefs.getString("name", "");
         if(value.isEmpty()){
@@ -25,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         configureLoginButton();
         configureRegisterButton();
+        configureFAQButton();
     }
 
     private void configureLoginButton(){
@@ -43,6 +42,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+            }
+        });
+    }
+
+    private void configureFAQButton(){
+        Button FAQsButton = (Button) findViewById(R.id.FAQ_Button);
+        FAQsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(MainActivity.this, FAQsActivity.class));
+
             }
         });
     }

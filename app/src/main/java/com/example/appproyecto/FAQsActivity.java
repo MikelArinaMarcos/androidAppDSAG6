@@ -7,8 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.appproyecto.modelo.FAQ;
 import com.example.appproyecto.modelo.Objeto;
 import com.example.appproyecto.modelo.Swagger;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
@@ -21,22 +24,24 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class tienda extends AppCompatActivity {
+public class FAQsActivity extends AppCompatActivity {
+    ProgressBar progressBar;
+
     private RecyclerView recyclerView;
-    private MyAdapter adapter;
+    private MyAdapter_FAQ adapter;
     private RecyclerView.LayoutManager layoutManager;
     //private SwipeRefreshLayout swipeRefreshLayout;
-    private List<Objeto> listaobjetos;
-
+    private List<FAQ> preguntas;
 
     private final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tienda);
+        setContentView(R.layout.activity_faqs);
 
-        listaobjetos = new ArrayList<>();
+        preguntas = new ArrayList<>();
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
@@ -45,10 +50,10 @@ public class tienda extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new MyAdapter(this);
+        adapter = new MyAdapter_FAQ(this);
         recyclerView.setAdapter(adapter);
 
-        doApiCall(); //null
+        doApiCall();
 
         // Manage swipe on items
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback =
@@ -60,37 +65,42 @@ public class tienda extends AppCompatActivity {
                     }
                     @Override
                     public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                        //adapter.remove(viewHolder.getAdapterPosition());
-                        Log.d("IDObjeto",String.valueOf(viewHolder.getAdapterPosition()));
+                        adapter.remove(viewHolder.getAdapterPosition());
                     }
                 };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
-    private void doApiCall() { //final SwipeRefreshLayout mySwipeRefreshLayout
-        Swagger swagger = Swagger.retrofit.create(Swagger.class);
-        Call<List<Objeto>> call = swagger.Objetos();
 
-        call.enqueue(new Callback<List<Objeto>>() {
+    private void doApiCall() { //final SwipeRefreshLayout mySwipeRefreshLayout
+        progressBar.setVisibility(View.VISIBLE);
+
+        Swagger swagger = Swagger.retrofit.create(Swagger.class);
+        Call<List<FAQ>> call = swagger.Preguntas();
+
+        call.enqueue(new Callback<List<FAQ>>() {
             @Override
-            public void onResponse(Call<List<Objeto>> call, Response<List<Objeto>> response) {
+            public void onResponse(Call<List<FAQ>> call, Response<List<FAQ>> response) {
                 // set the results to the adapter
                 adapter.setData(response.body());
-                Log.d("Tienda",response.body().toString());
-                listaobjetos = response.body();
-                for (int i = 0; i < listaobjetos.size(); i++){
-                    Log.d("NombreObjeto" + i,listaobjetos.get(i).getNombre());
+                Log.d("FAQs",response.body().toString());
+                preguntas = response.body();
+                for (int i = 0; i < preguntas.size(); i++){
+                    Log.d("Preguntas" + i,preguntas.get(i).getPregunta());
                 }
-                for (int i = 0; i < listaobjetos.size(); i++){
-                    Log.d("ID" + i,String.valueOf(listaobjetos.get(i).getIdObjeto()));
+                for (int i = 0; i < preguntas.size(); i++){
+                    Log.d("Respuestas" + i,String.valueOf(preguntas.get(i).getRespuesta()));
                 }
             }
             @Override
-            public void onFailure(Call<List<Objeto>> call, Throwable t) {
+            public void onFailure(Call<List<FAQ>> call, Throwable t) {
                 String msg = "Error in retrofit: "+t.toString();
                 Log.d(TAG,msg);
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG);
             }
         });
+        progressBar.setVisibility(View.GONE);
+
     }
+
 }
