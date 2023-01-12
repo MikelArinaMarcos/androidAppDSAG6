@@ -23,11 +23,13 @@ public class activity_profile extends AppCompatActivity {
         TextView username = (TextView) findViewById(R.id.username);
         TextView dinero = (TextView) findViewById(R.id.dinero);
         TextView mail = (TextView) findViewById(R.id.mail);
+        TextView language = (TextView) findViewById(R.id.language);
 
         //Utilizamos las SharedPreferences para asignar los valores del usuario al campo del perfil
         SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
         username.setText("Username: " + prefs.getString("username",""));
         dinero.setText("Dinero: " + String.valueOf(prefs.getInt("dinero",0)));
         mail.setText("Mail: " + prefs.getString("mail",""));
+        language.setText("Language: " + prefs.getString("language", ""));
     }
 }
