@@ -20,6 +20,18 @@ public class PrincipalActivity extends AppCompatActivity {
         configureLogoutButton();
 
         configureProfileButton();
+
+        configureRankingButton();
+    }
+
+    private void configureRankingButton(){
+        Button button = (Button) findViewById(R.id.button3);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PrincipalActivity.this, Ranking.class));
+            }
+        });
     }
 
     private void configureProfileButton(){

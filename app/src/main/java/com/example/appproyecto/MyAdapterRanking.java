@@ -31,8 +31,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
-    private  AppCompatActivity activity;
+public class MyAdapterRanking extends RecyclerView.Adapter<MyAdapterRanking.ViewHolder>{
+    private AppCompatActivity activity;
     private List<Objeto> values;
     private List<User> values2;
 
@@ -58,7 +58,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
 
     public void setData(List<Objeto> myDataset) {
         values = myDataset;
-        notifyDataSetChanged();
+        //notifyDataSetChanged();
     }
 
     public void setData2(List<User> myDataset) {
@@ -68,93 +68,60 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
 
     public void add(int position, Objeto item) {
         values.add(position, item);
-        notifyItemInserted(position);
+        //notifyItemInserted(position);
     }
 
     public void remove(int position) {
         values.remove(position);
-        notifyItemRemoved(position);
+        //notifyItemRemoved(position);
     }
 
-    public MyAdapter(AppCompatActivity activity){
+    public MyAdapterRanking(AppCompatActivity activity){
         this.activity = activity;
-        values = new ArrayList<>();}
+        values2 = new ArrayList<>();}
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<Objeto> myDataset) {
-        values = myDataset;
+    public MyAdapterRanking(List<User> myDataset) {
+        values2 = myDataset;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                 int viewType) {
+    public MyAdapterRanking.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                   int viewType) {
         // create a new view
         LayoutInflater inflater = LayoutInflater.from(
                 parent.getContext());
         View v =
                 inflater.inflate(R.layout.activity_row_layout, parent, false);
         // set the view's size, margins, paddings and layout parameters
-        ViewHolder vh = new ViewHolder(v);
+        MyAdapterRanking.ViewHolder vh = new MyAdapterRanking.ViewHolder(v);
         return vh;
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(MyAdapterRanking.ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        Objeto o = values.get(position);
-        final String name = o.getNombre();
-        holder.txtHeader.setText(name);
-        holder.txtHeader.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //remove(position);
-                for (int i = 0; i < values.size(); i++){
-                    Log.d("NombreObjeto" + i,values.get(i).getNombre());
-                }
-                for (int i = 0; i < values.size(); i++){
-                    Log.d("ID" + i,String.valueOf(values.get(i).getIdObjeto()));
-                }
+        for (int i = 0; i < values2.size(); i++){
+            Log.d("NombreUsuarioLista" + i,values2.get(i).getName());
+        }
+        for (int i = 0; i < values2.size(); i++){
+            Log.d("xpLista" + i,String.valueOf(values2.get(i).getXp()));
+        }
 
-                SharedPreferences prefs = MyAdapter.this.activity.getSharedPreferences("myPrefs", MODE_PRIVATE);
-                int idUsuario = prefs.getInt("idUsuario",0);
-                Swagger swagger = Swagger.retrofit.create(Swagger.class);
-                //MyAdapter.this.activity.
-                Call call = swagger.ComprarObjeto(idUsuario,values.get(position).getIdObjeto());
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onResponse(Call call, Response response) {
-                        //Log.d("ComprarObjeto","Objeto Compradissimo");
-                        if (response.isSuccessful()){
-                            Snackbar mySnackbar = Snackbar.make(v, "Objeto Compradisssssimo", BaseTransientBottomBar.LENGTH_SHORT);
-                            mySnackbar.show();
-                        }
-                        else{
-                            Snackbar mySnackbar = Snackbar.make(v, "Eres mas pobre que un Venezolano", BaseTransientBottomBar.LENGTH_SHORT);
-                            mySnackbar.show();
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call call, Throwable t) {
-                        Snackbar mySnackbar = Snackbar.make(v, "Obten Conexion primero crack", BaseTransientBottomBar.LENGTH_SHORT);
-                        mySnackbar.show();
-                    }
+        User u = values2.get(position);
+        final String name = u.getName();
+        holder.txtHeader.setText("Usuario: " + name);
 
-                });
+        holder.txtFooter.setText("Experiencia: " + u.getXp()); //"Descripcion: " + o.getDescripcion()
 
-            }
-        });
-
-        holder.txtFooter.setText(o.getDescripcion()); //"Descripcion: " + o.getDescripcion()
-
-        holder.icon.setImageResource(R.drawable.icono_arma2);
+        //holder.icon.setImageResource(R.drawable.icono_arma2);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return values.size();
+        return values2.size();
     }
-
 }
