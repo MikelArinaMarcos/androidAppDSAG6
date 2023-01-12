@@ -2,4 +2,6 @@
     <string name="app_name">ProjectApp</string>
     <string name="texto_bienvenida">Welcome to the APP</string>
     <string name="cambiar_idioma">Change app language</string>
+
+    <string name="Login_button">LOGIN</string>
 </resources>

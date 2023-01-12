@@ -12,9 +12,19 @@ public class User {
     private Integer dinero;
     private Integer xp;
 
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    private String language;
+
     public User(){}
 
-    public User(String Username,String Mail, String Name, String LastName, String Pasword) {
+    public User(String Username,String Mail, String Name, String LastName, String Pasword, String Language) {
         this.username = Username;
         this.xp = 0;
         this.mail = Mail;
@@ -22,6 +32,7 @@ public class User {
         this.lastName = LastName;
         this.password = Pasword;
         this.dinero = 100;
+        this.language = Language;
     }
 
     public User(int idUsuario, int xp, String username, String mail, String name, String lastName, String password, Integer dinero) {
@@ -33,6 +44,9 @@ public class User {
         this.lastName = lastName;
         this.password = password;
         this.dinero = dinero;
+    }
+
+    public User(String toString, String toString1, String toString2, String toString3, String toString4) {
     }
 
     public int getIdUsuario() {
