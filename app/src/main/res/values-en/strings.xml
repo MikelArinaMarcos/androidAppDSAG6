@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppProyecto</string>
-    <string name="texto_bienvenida">Bienvenido al juego</string>
-    <string name="cambiar_idioma">Cambiar idioma</string>
+    <string name="app_name">ProjectApp</string>
+    <string name="texto_bienvenida">Welcome to the APP</string>
+    <string name="cambiar_idioma">Change app language</string>
 </resources>
