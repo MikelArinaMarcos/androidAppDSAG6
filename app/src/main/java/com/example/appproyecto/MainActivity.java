@@ -10,10 +10,22 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button language;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        language = (Button) findViewById(R.id.idiomaBtn);
+
+        language.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            startActivity(new Intent(MainActivity.this, LanguageActivity.class));
+            }
+        });
+
 
         SharedPreferences prefs = getSharedPreferences("myPrefs", MODE_PRIVATE);
         String value = prefs.getString("name", "");
