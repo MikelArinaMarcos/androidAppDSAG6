@@ -16,6 +16,7 @@ public interface Swagger {
 
     String URL = "http://10.0.2.2:8080/dsaApp/";//
     //String URL = "http://147.83.7.208:8080/dsaApp/";
+    //String URL = "http://10.192.31.128:8080/dsaApp/";
 
     HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY);

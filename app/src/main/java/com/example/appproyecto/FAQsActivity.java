@@ -25,7 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FAQsActivity extends AppCompatActivity {
-    ProgressBar progressBar;
+    private ProgressBar progressBar;
 
     private RecyclerView recyclerView;
     private MyAdapter_FAQ adapter;
