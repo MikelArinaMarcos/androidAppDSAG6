@@ -42,4 +42,10 @@ public interface Swagger {
 
     @POST("juego/user/buy/{idObjeto}/{idUsuario}")
     Call<Void> ComprarObjeto(@Path("idUsuario")int idUsuario, @Path("idObjeto")int idObjeto);
+
+    @GET("juego/users")
+    Call<List<User>> Usuarios();
+
+    @POST("issue")
+    Call<Issue> Issue(Issue issue);
 }

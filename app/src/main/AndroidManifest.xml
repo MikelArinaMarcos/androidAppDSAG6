@@ -23,6 +23,20 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".DenunciaActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Ranking"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activity_profile"
             android:exported="false">
             <meta-data
