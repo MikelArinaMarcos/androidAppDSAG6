@@ -44,7 +44,7 @@ public class DenunciaActivity extends AppCompatActivity {
                 Swagger swagger = Swagger.retrofit.create(Swagger.class);
                 //Assignamos valores a una classe Issue
                 Issue issue = new Issue(date.getText().toString() ,informer.getText().toString(),message.getText().toString());
-                Call<Issue> call = swagger.Issue(issue);
+                Call<Issue> call = swagger.AddIssue(issue);
 
 
 

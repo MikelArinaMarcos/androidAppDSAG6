@@ -24,6 +24,18 @@ public class PrincipalActivity extends AppCompatActivity {
         configureRankingButton();
 
         configureDenunciaButton();
+
+        configureForoButton();
+    }
+
+    private void configureForoButton(){
+        Button button = (Button) findViewById(R.id.button_foro);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PrincipalActivity.this, Foro.class));
+            }
+        });
     }
 
     private void configureRankingButton(){

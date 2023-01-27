@@ -48,4 +48,11 @@ public interface Swagger {
 
     @POST("issue")
     Call<Issue> Issue(Issue issue);
+
+    @POST("juego/Issue/add")
+    Call<Issue> AddIssue(Issue issue);
+
+    @GET("juego/Issues")
+    Call<List<Issue>> Issues();
+
 }
